@@ -6,9 +6,6 @@
  */
 
 #include <Model/KeyPressEventModel.h>
-#include <Peripheral/KeyboardOutputImpl.h>
-
-using peripheral::KeyboardOutputImpl;
 
 namespace model {
 
@@ -27,13 +24,6 @@ KeyPressEventModel::KeyPressEventModel(char key, uint32_t posDelay_ms, uint32_t 
 KeyPressEventModel::~KeyPressEventModel()
 {
 	// TODO Auto-generated destructor stub
-}
-
-void KeyPressEventModel::execEvent()
-{
-	HAL_Delay(m_preDelay_ms);
-	KeyboardOutputImpl::getInstance()->tapKey(static_cast<uint8_t>(m_key));
-	HAL_Delay(m_posDelay_ms);
 }
 
 KeyModelEnum KeyPressEventModel::charToKeyModelEnum(char c) const
@@ -102,6 +92,30 @@ KeyModelEnum KeyPressEventModel::charToKeyModelEnum(char c) const
         case ')': return KeyModelEnum::Keyboard_RightParenthesisSymbol; // Dollar symbol (assuming shifted 4)
         default: return KeyModelEnum::Reserved; // Valor padrão para caractere não mapeado
     }
+}
+
+KeyModelEnum KeyPressEventModel::getKey() const {
+	return m_key;
+}
+
+void KeyPressEventModel::setKey(KeyModelEnum key) {
+	m_key = key;
+}
+
+uint32_t KeyPressEventModel::getPosDelayMs() const {
+	return m_posDelay_ms;
+}
+
+void KeyPressEventModel::setPosDelayMs(uint32_t posDelayMs) {
+	m_posDelay_ms = posDelayMs;
+}
+
+uint32_t KeyPressEventModel::getPreDelayMs() const {
+	return m_preDelay_ms;
+}
+
+void KeyPressEventModel::setPreDelayMs(uint32_t preDelayMs) {
+	m_preDelay_ms = preDelayMs;
 }
 
 } /* namespace model */

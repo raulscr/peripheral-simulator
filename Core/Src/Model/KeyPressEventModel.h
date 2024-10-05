@@ -10,14 +10,11 @@
 
 #include <stdint.h>
 
-#include "stm32f1xx_hal.h"
-
-#include "Model/EventInterfaceModel.h"
 #include "Model/KeyModelEnum.h"
 
 namespace model {
 
-class KeyPressEventModel : public EventInterfaceModel {
+class KeyPressEventModel {
 public:
 	KeyPressEventModel(KeyModelEnum key, uint32_t posDelay_ms, uint32_t preDelay_ms = 0);
 	KeyPressEventModel(char key, uint32_t posDelay_ms, uint32_t preDelay_ms = 0);
@@ -25,7 +22,15 @@ public:
 
 	KeyModelEnum charToKeyModelEnum(char c) const;
 
-	void execEvent();
+	KeyModelEnum getKey() const;
+	void setKey(KeyModelEnum key);
+
+	uint32_t getPosDelayMs() const;
+	void setPosDelayMs(uint32_t posDelayMs);
+
+	uint32_t getPreDelayMs() const;
+	void setPreDelayMs(uint32_t preDelayMs);
+
 private:
 	uint32_t m_preDelay_ms;
 	uint32_t m_posDelay_ms;

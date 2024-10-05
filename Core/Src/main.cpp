@@ -17,14 +17,18 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
+#include <Controller/PeripheralRoutinesController.h>
 #include <Service/PeripheralEventService.h>
 #include <Model/KeyPressEventModel.h>
+#include <Model/KeyModelEnum.h>
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+using controller::PeripheralRoutinesController;
 using service::PeripheralEventService;
 using model::KeyPressEventModel;
+using model::KeyModelEnum;
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -63,16 +67,35 @@ int main(void)
 	SystemClock_Config();
 	MX_GPIO_Init();
 
-	PeripheralEventService events({
-		std::make_shared<KeyPressEventModel>('q', 50),
-		std::make_shared<KeyPressEventModel>('a', 50),
-		std::make_shared<KeyPressEventModel>('q', 50)
+	// TODO: make a builder for this singetons
+	std::shared_ptr<service::PeripheralEventService> serviceSingleton = std::make_shared<service::PeripheralEventService>();
+	std::shared_ptr<controller::PeripheralRoutinesController> routineControllerSingleton =
+			std::make_shared<controller::PeripheralRoutinesController>(serviceSingleton);
+
+	routineControllerSingleton->registerRoutine({
+		std::make_shared<KeyPressEventModel>('1', 200),
+		std::make_shared<KeyPressEventModel>('2', 200),
+		std::make_shared<KeyPressEventModel>('3', 200),
+		std::make_shared<KeyPressEventModel>('4', 0)
+	}, 120000);
+
+	routineControllerSingleton->registerRoutine({
+		std::make_shared<KeyPressEventModel>('c', 1200),
+		std::make_shared<KeyPressEventModel>('q', 700),
+		std::make_shared<KeyPressEventModel>('q', 1200),
+		std::make_shared<KeyPressEventModel>('c', 2500),
+		std::make_shared<KeyPressEventModel>('q', 700),
+		std::make_shared<KeyPressEventModel>('q', 200),
+		std::make_shared<KeyPressEventModel>('c', 200),
+		std::make_shared<KeyPressEventModel>('j', 700)
 	});
+
+	HAL_Delay(2000);
 
 	while (1)
 	{
 		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-		events.execEvents();
+		routineControllerSingleton->execEvents();
 	}
 }
 
