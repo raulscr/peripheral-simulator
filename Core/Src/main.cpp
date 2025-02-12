@@ -21,6 +21,8 @@
 #include <Service/PeripheralEventService.h>
 #include <Model/Keyboard/KeyPressEventModel.h>
 #include <Model/Keyboard/KeyModelEnum.h>
+#include <Model/Mouse/MouseEventModel.h>
+#include <Model/Mouse/MouseButtonEnum.h>
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -29,6 +31,8 @@ using controller::PeripheralRoutinesController;
 using service::PeripheralEventService;
 using model::KeyPressEventModel;
 using model::KeyModelEnum;
+using model::MouseEventModel;
+using model::MouseButtonEnum;
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
