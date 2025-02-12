@@ -5,7 +5,7 @@
  *      Author: rauls
  */
 
-#include <Model/RoutineModel.h>
+#include <Model/Routines/RoutineModel.h>
 
 namespace model {
 

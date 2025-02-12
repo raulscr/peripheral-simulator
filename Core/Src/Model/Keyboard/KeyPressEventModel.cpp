@@ -5,7 +5,7 @@
  *      Author: rauls
  */
 
-#include <Model/KeyPressEventModel.h>
+#include <Model/Keyboard/KeyPressEventModel.h>
 
 namespace model {
 

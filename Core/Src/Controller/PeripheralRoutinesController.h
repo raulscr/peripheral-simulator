@@ -11,7 +11,7 @@
 #include <memory>
 #include <list>
 
-#include <Model/RoutineModel.h>
+#include <Model/Routines/RoutineModel.h>
 #include <Service/PeripheralEventService.h>
 
 namespace controller {

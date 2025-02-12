@@ -19,8 +19,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include <Controller/PeripheralRoutinesController.h>
 #include <Service/PeripheralEventService.h>
-#include <Model/KeyPressEventModel.h>
-#include <Model/KeyModelEnum.h>
+#include <Model/Keyboard/KeyPressEventModel.h>
+#include <Model/Keyboard/KeyModelEnum.h>
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/

@@ -11,7 +11,7 @@
 #include <memory>
 #include <list>
 
-#include "Model/KeyPressEventModel.h"
+#include "Model/Keyboard/KeyPressEventModel.h"
 
 namespace service {
 

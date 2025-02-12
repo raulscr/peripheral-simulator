@@ -10,7 +10,7 @@
 
 #include <stdint.h>
 
-#include "Model/KeyModelEnum.h"
+#include "Model/Keyboard/KeyModelEnum.h"
 #include "Model/EventModelInterface.h"
 
 namespace model {
