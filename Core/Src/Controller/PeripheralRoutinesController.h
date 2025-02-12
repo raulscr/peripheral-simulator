@@ -27,7 +27,7 @@ public:
 
 	virtual ~PeripheralRoutinesController();
 
-	void registerRoutine(const std::list<std::shared_ptr<model::KeyPressEventModel>>& events, uint32_t reloadTime = 0);
+	void registerRoutine(const std::list<std::shared_ptr<model::EventModelInterface>>& events, uint32_t reloadTime = 0);
 	void registerRoutine(std::shared_ptr<model::RoutineModel> routine);
 
 	void execEvents();

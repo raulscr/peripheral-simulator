@@ -10,6 +10,8 @@
 namespace model {
 
 KeyPressEventModel::KeyPressEventModel(KeyModelEnum key, uint32_t posDelay_ms, uint32_t preDelay_ms) :
+		m_keyboardMessage({0, 0, (uint8_t)key, 0, 0, 0, 0, 0}),
+		m_keyboardMessageRelease({0, 0, 0, 0, 0, 0, 0, 0}),
 		m_preDelay_ms(preDelay_ms),
 		m_posDelay_ms(posDelay_ms),
 		m_key(key)
@@ -116,6 +118,26 @@ uint32_t KeyPressEventModel::getPreDelayMs() const {
 
 void KeyPressEventModel::setPreDelayMs(uint32_t preDelayMs) {
 	m_preDelay_ms = preDelayMs;
+}
+
+
+uint8_t* KeyPressEventModel::bytes() const {
+	// TODO: fix cast to C++ cast
+	return (uint8_t*)(&m_keyboardMessage);
+}
+
+uint8_t* KeyPressEventModel::bytesRelease() const {
+	// TODO: fix cast to C++ cast
+	return (uint8_t*)&m_keyboardMessageRelease;
+}
+
+uint32_t KeyPressEventModel::byteSize() const {
+	const static uint32_t size = sizeof(KeyboardHID);
+	return size;
+}
+
+uint32_t KeyPressEventModel::duration() const {
+	return 50;
 }
 
 } /* namespace model */

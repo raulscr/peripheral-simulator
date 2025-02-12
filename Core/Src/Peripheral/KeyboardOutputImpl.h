@@ -10,9 +10,11 @@
 
 #include <memory>
 
+#include "Model/EventModelInterface.h"
+
 namespace peripheral {
 
-class KeyboardOutputImpl final {
+class KeyboardOutputImpl {
 public:
 	static std::shared_ptr<KeyboardOutputImpl> getInstance();
 
@@ -22,21 +24,8 @@ public:
 	KeyboardOutputImpl& operator=(const KeyboardOutputImpl &other) = delete;
 	KeyboardOutputImpl& operator=(KeyboardOutputImpl &&other) = delete;
 
-	void tapKey(uint8_t key, uint32_t time = 50);
+	void generateEvent(const std::shared_ptr<model::EventModelInterface>& event);
 private:
-	typedef struct {
-		uint8_t Modifier;
-		uint8_t Reserved;
-		uint8_t KeyCode1;
-		uint8_t KeyCode2;
-		uint8_t KeyCode3;
-		uint8_t KeyCode4;
-		uint8_t KeyCode5;
-		uint8_t KeyCode6;
-	} KeyboardHID;
-
-	KeyboardHID m_keyboardMessage;
-
 	KeyboardOutputImpl();
 };
 

@@ -17,21 +17,21 @@ namespace service {
 
 class PeripheralEventService {
 public:
-	explicit PeripheralEventService(const std::list<std::shared_ptr<model::KeyPressEventModel>>& events = {});
+	explicit PeripheralEventService(const std::list<std::shared_ptr<model::EventModelInterface>>& events = {});
 	explicit PeripheralEventService(const PeripheralEventService& other);
 	virtual ~PeripheralEventService();
 
 	PeripheralEventService& operator=(const PeripheralEventService& other);
 
-	void addEventToList(std::shared_ptr<model::KeyPressEventModel> event);
-	void setEventList(const std::list<std::shared_ptr<model::KeyPressEventModel>>& events);
+	void addEventToList(std::shared_ptr<model::EventModelInterface> event);
+	void setEventList(const std::list<std::shared_ptr<model::EventModelInterface>>& events);
 
 	void execEvents();
-	void execEvents(const std::list<std::shared_ptr<model::KeyPressEventModel>>& events);
+	void execEvents(const std::list<std::shared_ptr<model::EventModelInterface>>& events);
 private:
-	void execEvent(std::shared_ptr<model::KeyPressEventModel> event);
+	void execEvent(const std::shared_ptr<model::EventModelInterface>& event);
 
-	std::list<std::shared_ptr<model::KeyPressEventModel>> m_eventList;
+	std::list<std::shared_ptr<model::EventModelInterface>> m_eventList;
 };
 
 } /* namespace service */

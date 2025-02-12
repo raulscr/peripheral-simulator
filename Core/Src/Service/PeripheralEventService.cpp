@@ -14,7 +14,7 @@ using peripheral::KeyboardOutputImpl;
 
 namespace service {
 
-PeripheralEventService::PeripheralEventService(const std::list<std::shared_ptr<model::KeyPressEventModel>>& events) :
+PeripheralEventService::PeripheralEventService(const std::list<std::shared_ptr<model::EventModelInterface>>& events) :
 		m_eventList(events)
 {
 
@@ -25,20 +25,20 @@ PeripheralEventService::~PeripheralEventService()
 	// TODO Auto-generated destructor stub
 }
 
-void PeripheralEventService::addEventToList(std::shared_ptr<model::KeyPressEventModel> event)
+void PeripheralEventService::addEventToList(std::shared_ptr<model::EventModelInterface> event)
 {
 	m_eventList.push_back(event);
 }
 
-void PeripheralEventService::setEventList(const std::list<std::shared_ptr<model::KeyPressEventModel>>& events)
+void PeripheralEventService::setEventList(const std::list<std::shared_ptr<model::EventModelInterface>>& events)
 {
 	m_eventList = events;
 }
 
-void PeripheralEventService::execEvent(std::shared_ptr<model::KeyPressEventModel> event)
+void PeripheralEventService::execEvent(const std::shared_ptr<model::EventModelInterface>& event)
 {
 	HAL_Delay(event->getPreDelayMs());
-	KeyboardOutputImpl::getInstance()->tapKey(static_cast<uint8_t>(event->getKey()));
+	KeyboardOutputImpl::getInstance()->generateEvent(event);
 	HAL_Delay(event->getPosDelayMs());
 }
 
@@ -50,7 +50,7 @@ void PeripheralEventService::execEvents()
 	}
 }
 
-void PeripheralEventService::execEvents(const std::list<std::shared_ptr<model::KeyPressEventModel> >& events) {
+void PeripheralEventService::execEvents(const std::list<std::shared_ptr<model::EventModelInterface> >& events) {
 	setEventList(events);
 	execEvents();
 }

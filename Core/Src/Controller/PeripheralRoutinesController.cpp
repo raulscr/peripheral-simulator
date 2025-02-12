@@ -41,7 +41,7 @@ void PeripheralRoutinesController::execEvents()
 }
 
 void PeripheralRoutinesController::registerRoutine(
-		const std::list<std::shared_ptr<model::KeyPressEventModel> > &events,
+		const std::list<std::shared_ptr<model::EventModelInterface> > &events,
 		uint32_t reloadTime) {
 	m_routines.push_back(std::make_shared<model::RoutineModel>(events, reloadTime));
 }

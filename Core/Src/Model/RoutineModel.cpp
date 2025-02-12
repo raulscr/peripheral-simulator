@@ -9,7 +9,7 @@
 
 namespace model {
 
-RoutineModel::RoutineModel(const std::list<std::shared_ptr<model::KeyPressEventModel> > &routines, uint32_t reloadTime) :
+RoutineModel::RoutineModel(const std::list<std::shared_ptr<model::EventModelInterface> > &routines, uint32_t reloadTime) :
 	m_routines(routines),
 	m_reloadTime(reloadTime){
 }
@@ -18,11 +18,11 @@ RoutineModel::~RoutineModel() {
 	// TODO Auto-generated destructor stub
 }
 
-void RoutineModel::setRoutines(const std::list<std::shared_ptr<model::KeyPressEventModel> > &routines) {
+void RoutineModel::setRoutines(const std::list<std::shared_ptr<model::EventModelInterface> > &routines) {
 	m_routines = routines;
 }
 
-std::list<std::shared_ptr<model::KeyPressEventModel> > RoutineModel::getRoutines() const {
+std::list<std::shared_ptr<model::EventModelInterface> > RoutineModel::getRoutines() const {
 	return m_routines;
 }
 
