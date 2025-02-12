@@ -1,11 +1,11 @@
 /*
- * KeyboardOutputImpl.cpp
+ * EventWritter.cpp
  *
  *  Created on: Jul 21, 2024
  *      Author: rauls
  */
 
-#include <Peripheral/KeyboardOutputImpl.h>
+#include <Peripheral/EventWritter.h>
 #include "usb_device.h"
 #include "usbd_hid.h"
 
@@ -13,27 +13,27 @@ extern USBD_HandleTypeDef hUsbDeviceFS;
 
 namespace peripheral {
 
-KeyboardOutputImpl::~KeyboardOutputImpl()
+EventWritter::~EventWritter()
 {
 	// TODO Auto-generated destructor stub
 }
 
-KeyboardOutputImpl::KeyboardOutputImpl()
+EventWritter::EventWritter()
 {
 	MX_USB_DEVICE_Init();
 }
 
-std::shared_ptr<KeyboardOutputImpl> KeyboardOutputImpl::getInstance(){
-	static std::shared_ptr<KeyboardOutputImpl> _instance = nullptr;
+std::shared_ptr<EventWritter> EventWritter::getInstance(){
+	static std::shared_ptr<EventWritter> _instance = nullptr;
 	if ( _instance == nullptr )
 	{
-		_instance.reset(new KeyboardOutputImpl());
+		_instance.reset(new EventWritter());
 	}
 
 	return _instance;
 }
 
-void KeyboardOutputImpl::generateEvent(const std::shared_ptr<model::EventModelInterface>& event){
+void EventWritter::writeEvent(const std::shared_ptr<model::EventModelInterface>& event){
 	USBD_HID_SendReport(&hUsbDeviceFS, event->bytes(), event->byteSize());
 
 	if ( event->duration() > 0 )

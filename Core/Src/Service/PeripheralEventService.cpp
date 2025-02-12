@@ -5,12 +5,12 @@
  *      Author: rauls
  */
 
+#include <Peripheral/EventWritter.h>
 #include "stm32f1xx_hal.h"
 
 #include <Service/PeripheralEventService.h>
-#include <Peripheral/KeyboardOutputImpl.h>
 
-using peripheral::KeyboardOutputImpl;
+using peripheral::EventWritter;
 
 namespace service {
 
@@ -38,7 +38,7 @@ void PeripheralEventService::setEventList(const std::list<std::shared_ptr<model:
 void PeripheralEventService::execEvent(const std::shared_ptr<model::EventModelInterface>& event)
 {
 	HAL_Delay(event->getPreDelayMs());
-	KeyboardOutputImpl::getInstance()->generateEvent(event);
+	EventWritter::getInstance()->writeEvent(event);
 	HAL_Delay(event->getPosDelayMs());
 }
 
