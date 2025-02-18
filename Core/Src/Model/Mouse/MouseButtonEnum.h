@@ -13,9 +13,10 @@
 namespace model {
 
 enum class MouseButtonEnum : uint8_t {
-	LeftButton = 0,
-	RightButton = 1,
-	MidButton = 2
+	NoButton = 0,
+	LeftButton = 1,
+	RightButton = 2,
+	MidButton = 4
 };
 
 }
