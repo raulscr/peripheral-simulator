@@ -42,6 +42,7 @@ private:
 	// move it to another keyboardEventClass that will only
 	// parse this class to the keyboard bytes object
 	typedef struct {
+		uint8_t DeviceId;
 		uint8_t Modifier;
 		uint8_t Reserved;
 		uint8_t KeyCode1;

@@ -9,19 +9,21 @@
 
 namespace model {
 
-MouseEventModel::MouseEventModel(MouseButtonEnum button, uint32_t posDelay_ms, uint32_t preDelay_ms) :
-		m_mouseMessage({(int8_t)button, 0, 0, 0}),
-		m_mouseMessageRelease({0, 0, 0, 0}),
+MouseEventModel::MouseEventModel(MouseButtonEnum button, int8_t move_x, int8_t move_y, uint32_t posDelay_ms, uint32_t preDelay_ms) :
+		m_mouseMessage({0x02, (int8_t)button, move_x, move_y, 0}),
+		m_mouseMessageRelease({0x02, 0, 0, 0, 0}),
 		m_preDelay_ms(preDelay_ms),
 		m_posDelay_ms(posDelay_ms)
 {
 }
 
+MouseEventModel::MouseEventModel(MouseButtonEnum button, uint32_t posDelay_ms, uint32_t preDelay_ms) :
+		MouseEventModel(button, 0, 0, posDelay_ms, preDelay_ms)
+{
+}
+
 MouseEventModel::MouseEventModel(int8_t move_x, int8_t move_y, uint32_t posDelay_ms, uint32_t preDelay_ms) :
-		m_mouseMessage({0, move_x, move_y, 0}),
-		m_mouseMessageRelease({0, 0, 0, 0}),
-		m_preDelay_ms(preDelay_ms),
-		m_posDelay_ms(posDelay_ms)
+		MouseEventModel(MouseButtonEnum::NoButton, move_x, move_y, posDelay_ms, preDelay_ms)
 {
 }
 

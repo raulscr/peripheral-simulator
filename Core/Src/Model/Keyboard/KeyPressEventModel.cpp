@@ -10,8 +10,8 @@
 namespace model {
 
 KeyPressEventModel::KeyPressEventModel(KeyModelEnum key, uint32_t posDelay_ms, uint32_t preDelay_ms) :
-		m_keyboardMessage({0, 0, (uint8_t)key, 0, 0, 0, 0, 0}),
-		m_keyboardMessageRelease({0, 0, 0, 0, 0, 0, 0, 0}),
+		m_keyboardMessage({0x01, 0, 0, (uint8_t)key, 0, 0, 0, 0, 0}),
+		m_keyboardMessageRelease({0x01, 0, 0, 0, 0, 0, 0, 0, 0}),
 		m_preDelay_ms(preDelay_ms),
 		m_posDelay_ms(posDelay_ms),
 		m_key(key)

@@ -18,6 +18,7 @@ namespace model {
 class MouseEventModel : public EventModelInterface {
 public:
 	MouseEventModel(MouseButtonEnum button, uint32_t posDelay_ms, uint32_t preDelay_ms = 0);
+	MouseEventModel(MouseButtonEnum button, int8_t move_x, int8_t move_y, uint32_t posDelay_ms, uint32_t preDelay_ms = 0);
 	MouseEventModel(int8_t move_x, int8_t move_y, uint32_t posDelay_ms, uint32_t preDelay_ms = 0);
 	virtual ~MouseEventModel();
 
@@ -38,6 +39,7 @@ private:
 	// move it to another keyboardEventClass that will only
 	// parse this class to the keyboard bytes object
 	typedef struct {
+		int8_t deviceId;
 	    int8_t buttons;
 	    int8_t x;
 	    int8_t y;
